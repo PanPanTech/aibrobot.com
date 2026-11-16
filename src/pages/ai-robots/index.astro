@@ -1,0 +1,56 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import Picture from '../../components/Picture.astro';
+import PriceDisclaimer from '../../components/PriceDisclaimer.astro';
+import { aiRobots } from '../../data/products';
+
+const robots = aiRobots();
+---
+<Base
+  title="AI bionic robots"
+  description="A 164 cm F-cup facial-expression head on a figure body, listed at $3,099 as of 15 November 2026. Available to order. It does not walk. Connectivity is confirmed before dispatch."
+>
+  <div class="wrap">
+    <header class="page-hero">
+      <p class="kicker">AI bionic robots</p>
+      <h1>An expression head on a body. Not a walking robot.</h1>
+      <p class="lead">
+        The AI figure in this catalog is a 164 cm F-cup body with expression head #1068, listed at $3,099 as of 15 November 2026. It is available to order. Companion figures elsewhere on the site are a different, transitional product.
+      </p>
+    </header>
+
+    <div class="split top" style="margin-bottom:3.5rem">
+      <div class="prose">
+        <p>
+          Notes supplied with this head describe a voice platform, a touch display of about four inches, a microphone and speakers, Wi-Fi and Bluetooth, and facial expressions that include a smile, a made face, and a kiss. The same notes mention language switching, stories, weather, reminders, and saved questions, and they give about eight hours of standby and about three hours of continuous interaction. We have not timed those figures ourselves, and we do not add claims we have not read — no walking gait, no constant body temperature, and no promise of a particular conversational model.
+        </p>
+        <p>
+          Two limits, stated as limits. The notes are explicit that this product does not walk and does not move on its own. The body is posed by hand, with limited motion in the head and neck. And we do not promise that the facial-expression system already works on US or EU home Wi-Fi. Notes we have seen describe trouble on networks away from where the head was set up, and the head’s own instructions ask the user to check the network if none is found. Connectivity is confirmed before dispatch.
+        </p>
+        <p>
+          Material is also confirmed before payment. Some notes title the body as silicone. Others describe an STPE body with this head. We will say which one a specific unit is before you pay.
+        </p>
+        <p>
+          The optional <a href="/voice-box">AI voice box</a> is a different product. It is an audio add-on at $100, pending confirmation, and it does not depend on connecting an expression head to a home network.
+        </p>
+      </div>
+      <div>
+        <div class="frame" style="aspect-ratio:1">
+          <Picture
+            src="/images/heroes/glasses"
+            alt="An adult figure with blonde hair and glasses in a pale jacket — collection photography, not a certified photograph of expression head #1068."
+            width={1000}
+            height={1000}
+          />
+        </div>
+        <p class="photo-caption">Collection photography. Not a certified studio photograph of head #1068. The listing we are using describes that figure as 164 cm, F-cup, with head #1068.</p>
+      </div>
+    </div>
+
+    <PriceDisclaimer />
+    <div class="grid-3" style="margin-top:2rem;margin-bottom:4rem">
+      {robots.map((p) => <ProductCard product={p} />)}
+    </div>
+  </div>
+</Base>

@@ -1,0 +1,52 @@
+---
+import Base from '../layouts/Base.astro';
+import Picture from '../components/Picture.astro';
+import { SITE } from '../data/site';
+---
+<Base
+  title="About AIB Robot"
+  description="AI Bionic Robot (AIB Robot) is a category site for AI bionic and companion robots. The expression-head figure for sale today does not walk. Adult companion figures are transitional products."
+>
+  <div class="wrap">
+    <header class="page-hero">
+      <p class="kicker">About</p>
+      <h1>AI bionic robots, starting from what exists.</h1>
+      <p class="lead">{SITE.legalName}, shortened to {SITE.name} on this site, is a category store for AI bionic and companion robots. The catalog today is smaller than that sentence, and we would rather say so than borrow a future that is not on the shelf.</p>
+    </header>
+    <div class="split top" style="margin-bottom:4rem">
+      <div class="prose">
+        <p>
+          The figure with an expression head is a head on a body. It can be posed by hand. It does not walk, and we do not promise that its conversation features work on a home Wi-Fi network in the US or the EU. Connectivity is confirmed before dispatch. The other products are adult companion figures — silicone or STPE bodies, 157 cm and above — offered while this category is still mostly bodies rather than mobile robots. They are transitional products in this catalog. They are not walking household robots, and we do not title them as a robot boyfriend or girlfriend.
+        </p>
+        <p>
+          The list is adult-realistic only: no cartoon or anime lines, and no child-like figures. It begins with bodies on the November 2026 US and EU warehouse lists and adds figures that are available to order, including the 164 cm F-cup expression head. We reconfirm stock and price before we ask you to pay. We do not publish warehouse unit counts, and we do not publish a delivery-day range we have not confirmed for your configuration.
+        </p>
+        <p>
+          This is a new brand. We have not published a street address or a company registration number on this site because we will not invent one. Correspondence is through the <a href="/contact">contact form</a> and through the order-request flow at checkout. When a public address is established, it will be added here. There is no payment processor on this site.
+        </p>
+        <h2>What we will not do</h2>
+        <p>
+          We show the public prices dated on each product page. We will not invent a discount, a stock count, or a feature this catalog does not have — including walking, a constant body temperature, or a claim that an expression head already works on every home network. We will not misdeclare a shipment. We will not sell a figure we are not prepared to describe from notes we have actually read.
+        </p>
+        <p>
+          If you buy for a shop or a studio, there is a <a href="/wholesale">trade inquiry</a>. It does not publish a trade price list. If you want to know how we handle data, damage, and the limits around these products, the <a href="/privacy">privacy</a>, <a href="/returns">returns</a>, and <a href="/compliance">compliance</a> pages are written to be read.
+        </p>
+        <div class="cluster" style="margin-top:1.75rem">
+          <a class="btn" href="/contact">Contact {SITE.name}</a>
+          <a class="btn btn-ghost" href="/ai-robots">The AI figure</a>
+        </div>
+      </div>
+      <div>
+        <div class="frame" style="aspect-ratio:1">
+          <Picture
+            src="/images/portraits/curly-portrait"
+            alt="A close portrait of an adult figure with dark curly hair, looking toward the camera."
+            width={721}
+            height={700}
+          />
+        </div>
+        <p class="photo-caption">Collection photography — clothing and finish, not a company premises.</p>
+      </div>
+    </div>
+  </div>
+</Base>

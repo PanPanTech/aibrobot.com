@@ -1,0 +1,232 @@
+---
+import Base from '../layouts/Base.astro';
+import Picture from '../components/Picture.astro';
+import ProductCard from '../components/ProductCard.astro';
+import PriceDisclaimer from '../components/PriceDisclaimer.astro';
+import { SITE } from '../data/site';
+import { featuredProducts, usWarehouseProducts, euWarehouseProducts, SKU_COUNT, aiRobots } from '../data/products';
+import { getCollection } from 'astro:content';
+
+const featured = featuredProducts();
+const usCount = usWarehouseProducts().length;
+const euCount = euWarehouseProducts().length;
+const ai = aiRobots();
+
+let posts: Awaited<ReturnType<typeof getCollection<'blog'>>> = [];
+try {
+  posts = (await getCollection('blog')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 3);
+} catch {
+  posts = [];
+}
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: SITE.legalName,
+    alternateName: SITE.name,
+    url: SITE.url,
+    description: SITE.description,
+    slogan: SITE.tagline,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE.name,
+    url: SITE.url,
+    description: SITE.description,
+  },
+];
+---
+<Base
+  title="AIB Robot — AI bionic and companion robots"
+  description={SITE.description}
+  jsonLd={jsonLd}
+>
+  <section class="hero">
+    <div class="hero-copy">
+      <p class="kicker">AI bionic robots</p>
+      <h1>Companion robots, described as they are.</h1>
+      <p class="lead">
+        {SITE.legalName} is a category site for AI bionic and companion robots. What we can sell today is narrower than that aim. The AI figure is a non-walking expression head on a 164 cm F-cup body. The other figures are adult companion bodies — transitional products in this catalog, not walking household robots.
+      </p>
+      <div class="cluster" style="margin-top:2rem">
+        <a class="btn" href="/ai-robots">The AI figure</a>
+        <a class="btn btn-ghost" href="/shop">Browse the collection</a>
+        <a class="btn btn-ghost" href="/in-stock-us">US warehouse list</a>
+      </div>
+      <p class="fine" style="margin-top:1.5rem">
+        {SKU_COUNT} adult figures, 157 cm and above. No child-like or anime lines. English-language store. Order requests only — no card payment on this site.
+      </p>
+    </div>
+    <div class="hero-visual">
+      <Picture
+        src="/images/heroes/glasses"
+        alt="An adult figure with blonde hair and clear-framed glasses, wearing a pale high-collar jacket, photographed against a cool studio background."
+        width={1000}
+        height={630}
+        loading="eager"
+        fetchpriority="high"
+      />
+      <span class="caption">Collection photography — clothing and styling, not a specific figure</span>
+    </div>
+  </section>
+
+  <div class="notice-band">
+    <div class="wrap-wide">
+      STPE companions are shown at $2,199, beside a previous list price of $2,599, as of 15 November 2026. Silicone companions use 2025 suggested retail. The expression-head figure is listed at $3,099. Warehouse notes are from November 2026 lists and are reconfirmed in writing before payment. We do not publish unit counts.
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split top">
+        <div>
+          <p class="kicker">What is for sale today</p>
+          <h2>One expression head. A short list of companion bodies.</h2>
+        </div>
+        <div class="prose">
+          <p>
+            The long-term subject of this site is AI bionic and companion robots. The catalog in front of you is the honest starting point: one adult expression-head figure, available to order, and companion figures drawn from the November 2026 US and EU warehouse lists plus figures available to order. {usCount} of them appear on the US list and {euCount} on the EU list — one body is on both.
+          </p>
+          <p>
+            We do not publish a delivery-day range, and we do not publish how many units a warehouse holds. We will confirm whether a specific unit is still on the named list — and the final price — before you are asked to pay.
+          </p>
+          <p>
+            Shipping is requested as discreet, unmarked outer packaging. Returns are written plainly: these are personal hygienic goods, and a change of mind after a sound delivery is not a return. The details are on our <a href="/shipping">shipping</a> and <a href="/returns">returns</a> pages.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="wrap-wide">
+      <div class="cluster" style="justify-content:space-between;margin-bottom:0.5rem">
+        <div>
+          <p class="kicker">Featured</p>
+          <h2 class="mt-0">Figures we would start with.</h2>
+        </div>
+        <a class="btn btn-ghost btn-sm" href="/shop">All {SKU_COUNT} figures</a>
+      </div>
+      <div class="grid-4" style="margin-top:1.5rem">
+        {featured.map((p) => <ProductCard product={p} />)}
+      </div>
+      <div style="margin-top:2rem">
+        <PriceDisclaimer short />
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--ivory-deep)">
+    <div class="wrap">
+      <div class="split">
+        <div class="frame" style="aspect-ratio:1;min-height:22rem">
+          <Picture
+            src="/images/heroes/glasses"
+            alt="An adult figure with blonde hair and glasses, wearing a pale high-collar jacket, photographed against a cool studio background."
+            width={1000}
+            height={1000}
+          />
+        </div>
+        <div>
+          <p class="kicker">AI bionic robots</p>
+          <h2>{ai[0] ? ai[0].title : 'A facial-expression head, described carefully.'}</h2>
+          <p class="lead">Listed at $3,099 as of 15 November 2026. Available to order. Two limits come with it.</p>
+          <div class="prose" style="margin-top:1.25rem">
+            <p>
+              This is a facial-expression head on a figure body. It does not walk, and the body is posed by hand. We do not promise that the expression and conversation features already work on US or EU home Wi-Fi. Connectivity is confirmed before dispatch.
+            </p>
+            <p>
+              The optional <a href="/voice-box">AI voice box</a> is a different product — $100, pending confirmation — and it does not depend on that Wi-Fi connection. Companion bodies elsewhere in the shop are not this robot.
+            </p>
+          </div>
+          <div class="cluster" style="margin-top:1.75rem">
+            <a class="btn" href="/ai-robots">The AI collection</a>
+            <a class="btn btn-ghost" href="/ai-robots/wm-164-f-1068">164 cm F-cup expression head</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="grid-3">
+        <div>
+          <p class="kicker">Transitional companions</p>
+          <h3>Silicone, STPE, and a TPE request.</h3>
+          <p class="muted">Silicone companions in this collection use 2025 suggested retail. STPE companions are listed at the current $2,199 price, beside $2,599. A TPE build can be requested and is priced on confirmation. These are companion figures, not walking robots.</p>
+          <p style="margin-top:1rem"><a href="/materials">Materials and finish →</a></p>
+        </div>
+        <div>
+          <p class="kicker">Care</p>
+          <h3>Cleaning, powder, and what not to use.</h3>
+          <p class="muted">A companion figure is a large, soft object that needs straightforward care. Keep water and powder off any electronic head or voice box.</p>
+          <p style="margin-top:1rem"><a href="/care">Care notes →</a></p>
+        </div>
+        <div>
+          <p class="kicker">Trade</p>
+          <h3>Inquiries for a shop or a studio.</h3>
+          <p class="muted">If you buy for a shop or a studio, use the trade form. We confirm what we can from the public prices and warehouse lists on this site. We do not publish a trade price list.</p>
+          <p style="margin-top:1rem"><a href="/wholesale">Trade inquiry →</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-sm">
+    <div class="wrap">
+      <div class="split">
+        <div class="frame" style="aspect-ratio:4/5">
+          <Picture
+            src="/images/lifestyle/magazine"
+            alt="An adult figure in a dark cap and a gold top, seated and reading a magazine."
+            width={625}
+            height={883}
+          />
+          <p class="photo-caption">Collection photography — illustrative of clothing and finish, not a listed figure.</p>
+        </div>
+        <div>
+          <p class="kicker">Privacy in transit</p>
+          <h2>Discreet packaging, and no games with customs.</h2>
+          <div class="prose">
+            <p>
+              We ask for unmarked outer packaging. We will confirm the packing method with your order. We will not misdeclare the contents of a shipment, and we do not ship to jurisdictions where these products are prohibited.
+            </p>
+            <p>
+              Your name and address are used to fulfill an inquiry or an order. The details are in our <a href="/privacy">privacy</a> and <a href="/compliance">compliance</a> pages.
+            </p>
+            <a class="btn btn-ghost" href="/shipping" style="margin-top:0.5rem">Shipping and packing</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <p class="kicker">Journal</p>
+      <h2>Notes on choosing, caring for, and living with a figure.</h2>
+      {posts.length === 0 ? (
+        <p class="lead">Essays are being prepared for this journal. The rest of the site is open now.</p>
+      ) : (
+        <div class="blog-list" style="margin-top:1.5rem">
+          {posts.map((post) => {
+            const slug = post.data.slug || post.id.replace(/\.mdx?$/, '');
+            return (
+              <a class="blog-item" href={`/blog/${slug}`}>
+                <div class="date">{post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' })}</div>
+                <div>
+                  <h2>{post.data.title}</h2>
+                  <p>{post.data.description}</p>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      )}
+      <p style="margin-top:1.5rem"><a href="/blog">Visit the journal →</a></p>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,8 @@
+---
+import { PRICE_DISCLAIMER, PRICE_DISCLAIMER_SHORT } from '../data/site';
+interface Props { short?: boolean; }
+const { short = false } = Astro.props;
+---
+<aside class="disclaimer" role="note">
+  {short ? PRICE_DISCLAIMER_SHORT : PRICE_DISCLAIMER}
+</aside>

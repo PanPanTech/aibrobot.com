@@ -1,0 +1,210 @@
+---
+import type { Product, Measurements } from '../data/products';
+import {
+  formatPrice,
+  relatedProducts,
+  availabilityLabel,
+  startingPrice,
+  compareAtPrice,
+  priceKindLabel,
+  isWarehouseStock,
+  leadTimeCopy,
+  lineLabel,
+} from '../data/products';
+import ProductCard from './ProductCard.astro';
+import InquiryPanel from './InquiryPanel.astro';
+import PriceDisclaimer from './PriceDisclaimer.astro';
+import Picture from './Picture.astro';
+import { SILICONE_OPTIONS_2025 } from '../data/site';
+
+interface Props { product: Product; }
+const { product: p } = Astro.props;
+
+const measureLabels: { key: keyof Measurements; label: string }[] = [
+  { key: 'fullBust', label: 'Full bust' },
+  { key: 'underBust', label: 'Under bust' },
+  { key: 'waist', label: 'Waist' },
+  { key: 'hip', label: 'Hip' },
+  { key: 'foot', label: 'Foot length' },
+  { key: 'leg', label: 'Leg length' },
+  { key: 'arm', label: 'Arm length' },
+  { key: 'shoulder', label: 'Shoulder breadth' },
+];
+const measures = measureLabels.filter((m) => p.measurements[m.key]);
+const related = relatedProducts(p);
+const from = startingPrice(p);
+const currentPrice = p.prices[p.defaultMaterial] ?? from;
+const compare = compareAtPrice(p, p.defaultMaterial);
+const priceKind = priceKindLabel(p);
+
+const crumbs = p.collection === 'ai-robot'
+  ? [{ href: '/ai-robots', label: 'AI robots' }]
+  : [{ href: '/shop', label: 'Shop' }];
+const hero = p.images[0];
+const options = SILICONE_OPTIONS_2025;
+---
+<div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="/">Home</a></li>
+      {crumbs.map((c) => <li><a href={c.href}>{c.label}</a></li>)}
+      <li aria-current="page">{p.shortName}</li>
+    </ol>
+  </nav>
+
+  <div class="pdp">
+    <div class="pdp-visual" data-product-gallery>
+      {hero && (
+        <figure class="pdp-gallery">
+          <div class="pdp-gallery-main">
+            <Picture
+              class="pdp-gallery-picture"
+              src={hero.src}
+              alt={hero.alt}
+              width={hero.width}
+              height={hero.height}
+              loading="eager"
+              fetchpriority="high"
+            />
+          </div>
+          {hero.caption && (
+            <figcaption class="pdp-gallery-caption">{hero.caption}</figcaption>
+          )}
+        </figure>
+      )}
+      {p.images.length > 1 && (
+        <div class="pdp-thumbs" role="list">
+          {p.images.map((img, i) => (
+            <button
+              type="button"
+              class="pdp-thumb"
+              role="listitem"
+              data-src={img.src}
+              data-alt={img.alt}
+              data-caption={img.caption}
+              data-width={String(img.width)}
+              data-height={String(img.height)}
+              aria-label={`View photo ${i + 1} of ${p.images.length}`}
+              aria-pressed={i === 0 ? 'true' : 'false'}
+              aria-current={i === 0 ? 'true' : undefined}
+            >
+              <Picture src={img.src} alt="" width={img.width} height={img.height} loading="lazy" />
+            </button>
+          ))}
+        </div>
+      )}
+      {p.collection === 'ai-robot' && (
+        <p class="pdp-gallery-note fine">
+          Body photographs show a 164 cm F-cup body. The expression head is configured separately. This figure does not walk.
+        </p>
+      )}
+    </div>
+
+    <div>
+      <p class="kicker">{lineLabel(p.line)}</p>
+      <h1>{p.title}</h1>
+      <div class="cluster" style="margin-bottom:1.25rem">
+        <span class={`badge ${isWarehouseStock(p) ? 'badge-ok' : 'badge-warn'}`}>
+          {availabilityLabel(p)}
+        </span>
+        {p.materials.map((m) => <span class="badge">{m}</span>)}
+        {p.collection === 'ai-robot' && <span class="badge badge-ai">Does not walk</span>}
+      </div>
+
+      <div class="price-block" style="margin-bottom:1.25rem">
+        <div class="amount-row">
+          {compare != null && (
+            <s class="compare-at" data-compare-display>{formatPrice(compare)}</s>
+          )}
+          <div class="amount" data-price-display>{formatPrice(currentPrice)}</div>
+        </div>
+        <p class="kind">
+          {priceKind}
+          {p.materials.length > 1 && (
+            <> · <span data-price-material>{p.defaultMaterial}</span></>
+          )}
+        </p>
+      </div>
+      <PriceDisclaimer short />
+
+      <div class="prose" style="margin:1.75rem 0">
+        {p.description.map((para) => <p>{para}</p>)}
+      </div>
+
+      {p.caveats.length > 0 && (
+        <aside class="disclaimer" role="note" style="margin-bottom:1.75rem">
+          <strong>Please read.</strong>
+          <ul style="margin:0.5rem 0 0;padding-left:1.15rem">
+            {p.caveats.map((c) => <li>{c}</li>)}
+          </ul>
+        </aside>
+      )}
+
+      <h2>Specifications</h2>
+      <table class="spec-table">
+        <tbody>
+          <tr><th>Line</th><td>{lineLabel(p.line)}</td></tr>
+          <tr><th>Height</th><td>{p.heightCm} cm</td></tr>
+          {p.cup && <tr><th>Cup</th><td>{p.cup}</td></tr>}
+          {p.headCode && <tr><th>Expression head</th><td>#{p.headCode}</td></tr>}
+          <tr><th>Material</th><td>{p.materials.join(' or ')}</td></tr>
+          {p.weightKg != null && <tr><th>Net weight</th><td>{p.weightKg} kg</td></tr>}
+          {measures.map((m) => (
+            <tr><th>{m.label}</th><td>{p.measurements[m.key]}</td></tr>
+          ))}
+          <tr><th>Availability</th><td>{availabilityLabel(p)}</td></tr>
+        </tbody>
+      </table>
+      <p class="fine">{p.measurementSource}</p>
+      <p class="fine">{p.priceSource}</p>
+
+      <h2 style="margin-top:2.25rem">Lead time</h2>
+      <p>{leadTimeCopy(p)}</p>
+
+      <h2 style="margin-top:2.25rem">Options</h2>
+      {p.line === 'silicone' && (
+        <div class="prose">
+          <p>
+            From the {options.source}: skin in {options.skin.join(', ')}; feet {options.feet.join(' or ')};
+            six eye colours ({options.eyes.join(', ')}); a sound option listed at +${options.soundUsd} USD
+            (this is a separate line from the AI voice box);
+            implanted hair +${options.implantedHairUsd}, implanted real hair +${options.implantedRealHairUsd};
+            breathing +${options.breathingUsd}; suction +${options.suckingUsd}.
+            {options.breathingSuckingNote}
+            Hands: {options.hands}. Areola colour: {options.areola.join(' or ')}.
+          </p>
+          <p>Tell us what you want in the notes of your inquiry. We confirm current option availability and price before payment.</p>
+        </div>
+      )}
+      {p.line === 'stpe' && (
+        <div class="prose">
+          <p>
+            These companion bodies are listed here in STPE. A TPE build can be requested and is priced on confirmation. The head is chosen separately and confirmed against the unit that is actually available. Skin, eyes, hair, and other options are confirmed with your inquiry.
+          </p>
+          <p>The optional AI voice box can be added below. Other options, where still offered, are confirmed before payment rather than assumed.</p>
+        </div>
+      )}
+      {p.collection === 'ai-robot' && (
+        <div class="prose">
+          <p>
+            Configuration — including material and current connectivity guidance — is confirmed before dispatch. The optional voice box may be added as a separate audio accessory. It does not make this figure walk.
+          </p>
+        </div>
+      )}
+
+      <div style="margin-top:2rem">
+        <InquiryPanel product={p} />
+      </div>
+    </div>
+  </div>
+
+  {related.length > 0 && (
+    <section class="section-sm">
+      <p class="kicker">Related figures</p>
+      <h2>You may also want to compare.</h2>
+      <div class="grid-3" style="margin-top:1.25rem">
+        {related.map((r) => <ProductCard product={r} />)}
+      </div>
+    </section>
+  )}
+</div>

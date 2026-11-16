@@ -1,0 +1,10 @@
+# Static redirects
+/journal /blog 301
+/journal/* /blog/:splat 301
+/in-stock /in-stock-us 301
+/in-stock-usa /in-stock-us 301
+/ai /ai-robots 301
+/ai-robot /ai-robots 301
+/privacy-policy /privacy 301
+/terms-of-service /terms 301
+/return-policy /returns 301

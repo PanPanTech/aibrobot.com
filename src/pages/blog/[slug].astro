@@ -1,0 +1,68 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+import { SITE } from '../../data/site';
+
+export async function getStaticPaths() {
+  let posts: Awaited<ReturnType<typeof getCollection<'blog'>>> = [];
+  try { posts = await getCollection('blog'); } catch { posts = []; }
+  return posts.map((post) => {
+    const slug = post.data.slug || post.id.replace(/\.mdx?$/, '').replace(/^.*\//, '');
+    return { params: { slug }, props: { post, slug } };
+  });
+}
+
+const { post, slug } = Astro.props;
+const { Content } = await render(post);
+const date = post.data.date.toLocaleDateString('en-US', {
+  year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC',
+});
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.date.toISOString(),
+  author: { '@type': 'Organization', name: SITE.name },
+  publisher: { '@type': 'Organization', name: SITE.name },
+  wordCount: post.data.wordCount,
+  mainEntityOfPage: new URL(`/blog/${slug}`, SITE.url).toString(),
+  audience: { '@type': 'PeopleAudience', suggestedMinAge: 18 },
+};
+---
+<Base
+  title={post.data.title}
+  description={post.data.description}
+  ogType="article"
+  jsonLd={jsonLd}
+>
+  <article class="article wrap">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/blog">Journal</a></li>
+        <li aria-current="page">{post.data.title}</li>
+      </ol>
+    </nav>
+    <p class="kicker" style="margin-top:2rem">Journal</p>
+    <h1>{post.data.title}</h1>
+    <p class="meta">
+      {date}
+      {post.data.wordCount ? ` · ${post.data.wordCount.toLocaleString('en-US')} words` : ''}
+      {post.data.wordCount ? ` · about ${Math.max(1, Math.round(post.data.wordCount / 250))} min read` : ''}
+    </p>
+    {post.data.tags && post.data.tags.length > 0 && (
+      <div class="tags" style="margin:-1.5rem 0 2rem">
+        {post.data.tags.map((t) => <a class="tag" href={`/blog/tag/${t}`}>{t.replace(/-/g, ' ')}</a>)}
+      </div>
+    )}
+    <div class="article-body prose">
+      <Content />
+    </div>
+    <p style="margin-top:3.5rem">
+      <a href="/blog">← All essays</a>
+      <span class="muted"> · </span>
+      <a href="/shop">The collection</a>
+    </p>
+  </article>
+</Base>

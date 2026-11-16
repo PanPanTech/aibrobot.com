@@ -1,0 +1,81 @@
+---
+import Base from '../layouts/Base.astro';
+import FormSuccess from '../components/FormSuccess.astro';
+---
+<Base
+  title="Wholesale"
+  description="Trade inquiries for shops and studios. AIB Robot does not publish a trade price list. Retail prices on this site are not a trade quote."
+>
+  <div class="wrap">
+    <header class="page-hero">
+      <p class="kicker">Trade</p>
+      <h1>Wholesale inquiries.</h1>
+      <p class="lead">If you buy for a shop or a studio, use this form. We will tell you what we can confirm from the public prices and warehouse lists on this site. We do not publish a trade price list.</p>
+    </header>
+    <div class="split top" style="margin-bottom:4.5rem">
+      <div class="prose">
+        <p>
+          AIB Robot sells the figures described on this site. Trade terms, if we can offer them, depend on the public prices shown here, on what a warehouse list still holds, and on a conversation with you about volume and destination. We do not publish a trade price list, and none of the retail prices shown here is a trade quote.
+        </p>
+        <p>
+          Please do not ask us to misdeclare a shipment, to advertise a public retail price we have not confirmed, or to supply child-like or anime figures. We will refuse those requests.
+        </p>
+      </div>
+      <div>
+        <FormSuccess title="Your wholesale inquiry has been recorded." />
+        <form data-aib-form="wholesale" data-subject="AIB Robot — wholesale inquiry" novalidate>
+          <p class="form-error" data-form-error role="alert"></p>
+          <div class="form-row">
+            <div class="field">
+              <label for="wh-name">Your name</label>
+              <input id="wh-name" name="name" type="text" required autocomplete="name" />
+            </div>
+            <div class="field">
+              <label for="wh-email">Email</label>
+              <input id="wh-email" name="email" type="email" required autocomplete="email" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="wh-company">Business name</label>
+              <input id="wh-company" name="company" type="text" required autocomplete="organization" />
+            </div>
+            <div class="field">
+              <label for="wh-country">Country</label>
+              <input id="wh-country" name="country" type="text" required autocomplete="country-name" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="wh-site">Business website (optional)</label>
+            <input id="wh-site" name="business_website" type="text" autocomplete="url" />
+          </div>
+          <div class="field">
+            <label for="wh-volume">Approximate annual volume or first order</label>
+            <input id="wh-volume" name="volume" type="text" required placeholder="For example: a first order of two or three figures, or a yearly range" />
+          </div>
+          <div class="field">
+            <label for="wh-interest">Lines of interest</label>
+            <textarea id="wh-interest" name="interest" required placeholder="Expression head, silicone companions, STPE companions, US or EU warehouse bodies, voice box, and any configurations you already have in mind."></textarea>
+          </div>
+          <div class="field sr-only" aria-hidden="true">
+            <label for="wh-website">Leave blank</label>
+            <input id="wh-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+          <label class="checkbox">
+            <input type="checkbox" name="age_confirm" required />
+            <span>I confirm that I am 18 or older, and that I am inquiring on behalf of a lawful business.</span>
+          </label>
+          <label class="checkbox">
+            <input type="checkbox" name="no_misdeclare" required />
+            <span>I understand that AIB Robot will not misdeclare shipments and will not supply prohibited or child-like figures.</span>
+          </label>
+          <button class="btn" type="submit">Send wholesale inquiry</button>
+          <p class="fine">This form is stored in your browser and prepared as an email draft so we can receive it. It is not a payment and not a contract.</p>
+          <noscript>
+            <p>JavaScript is required to record this inquiry. Please enable it, or write to us describing your business and your interest.</p>
+          </noscript>
+        </form>
+      </div>
+    </div>
+  </div>
+</Base>

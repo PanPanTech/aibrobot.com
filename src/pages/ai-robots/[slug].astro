@@ -1,0 +1,42 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProductDetail from '../../components/ProductDetail.astro';
+import { aiRobots, getProduct, startingPrice } from '../../data/products';
+import { SITE } from '../../data/site';
+
+export function getStaticPaths() {
+  return aiRobots().map((p) => ({ params: { slug: p.slug } }));
+}
+
+const { slug } = Astro.params;
+const product = getProduct(slug!);
+if (!product) throw new Error('Unknown AI product ' + slug);
+
+const price = startingPrice(product);
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: product.name,
+  brand: { '@type': 'Brand', name: SITE.name },
+  description: product.summary,
+  category: 'AI bionic companion robot',
+  audience: { '@type': 'PeopleAudience', suggestedMinAge: 18 },
+  offers: {
+    '@type': 'Offer',
+    url: new URL(`/ai-robots/${product.slug}`, SITE.url).toString(),
+    priceCurrency: 'USD',
+    price: price,
+    availability: 'https://schema.org/PreOrder',
+    itemCondition: 'https://schema.org/NewCondition',
+    description: 'Listed price on 15 November 2026; reconfirmed before payment. Connectivity confirmed before dispatch. This figure does not walk.',
+  },
+};
+---
+<Base
+  title={product.title}
+  description={product.summary}
+  ogType="product"
+  jsonLd={jsonLd}
+>
+  <ProductDetail product={product} />
+</Base>

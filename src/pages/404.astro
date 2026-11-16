@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base
+  title="Page not found"
+  description="The page you asked for is not in the AIB Robot site."
+  noindex={true}
+  requireAge={false}
+>
+  <div class="wrap not-found">
+    <p class="kicker">404</p>
+    <h1>This page is not on the site.</h1>
+    <p class="lead">The address may have been mistyped, or the page may have moved. The collection is still here.</p>
+    <div class="cluster" style="margin-top:2rem">
+      <a class="btn" href="/">Home</a>
+      <a class="btn btn-ghost" href="/shop">The collection</a>
+      <a class="btn btn-ghost" href="/contact">Contact</a>
+    </div>
+  </div>
+</Base>

@@ -1,0 +1,97 @@
+---
+import Base from '../layouts/Base.astro';
+import FormSuccess from '../components/FormSuccess.astro';
+import { PRICE_DISCLAIMER } from '../data/site';
+---
+<Base
+  title="Order request"
+  description="Submit an order request to AIB Robot. Inventory and the final price are confirmed before payment. No card is charged on this page."
+>
+  <div class="wrap">
+    <header class="page-hero">
+      <p class="kicker">Checkout</p>
+      <h1>Order request — not a payment.</h1>
+      <p class="lead">Tell us who you are and where a package would go. We will reply to confirm availability, the final price, and shipping. Card payment is arranged only after that confirmation, once a high-risk processor is approved. We do not collect card numbers on this site.</p>
+    </header>
+
+    <div class="split top" style="margin-bottom:4.5rem">
+      <div>
+        <h2>Your inquiry</h2>
+        <div data-checkout-summary></div>
+        <p class="fine" style="margin-top:1.25rem">{PRICE_DISCLAIMER}</p>
+      </div>
+      <div>
+        <FormSuccess title="Your order request has been recorded." />
+        <form
+          data-aib-form="checkout"
+          data-include-cart="true"
+          data-subject="AIB Robot — order request"
+          novalidate
+        >
+          <p class="form-error" data-form-error role="alert"></p>
+          <div class="form-row">
+            <div class="field">
+              <label for="o-name">Full name</label>
+              <input id="o-name" name="name" type="text" required autocomplete="name" />
+            </div>
+            <div class="field">
+              <label for="o-email">Email</label>
+              <input id="o-email" name="email" type="email" required autocomplete="email" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="o-phone">Telephone (optional)</label>
+            <input id="o-phone" name="phone" type="tel" autocomplete="tel" />
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="o-country">Shipping country</label>
+              <input id="o-country" name="country" type="text" required autocomplete="country-name" />
+            </div>
+            <div class="field">
+              <label for="o-city">City</label>
+              <input id="o-city" name="city" type="text" required autocomplete="address-level2" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="o-address">Street address</label>
+            <input id="o-address" name="address" type="text" required autocomplete="street-address" />
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="o-region">State or region (optional)</label>
+              <input id="o-region" name="region" type="text" autocomplete="address-level1" />
+            </div>
+            <div class="field">
+              <label for="o-postal">Postal code</label>
+              <input id="o-postal" name="postal" type="text" required autocomplete="postal-code" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="o-notes">Notes — head, skin, options, questions</label>
+            <textarea id="o-notes" name="notes" placeholder="For example: a preferred head, STPE rather than TPE, the voice box, or a question about stairs and weight."></textarea>
+          </div>
+          <div class="field sr-only" aria-hidden="true">
+            <label for="o-website">Leave blank</label>
+            <input id="o-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+          <label class="checkbox">
+            <input type="checkbox" name="age_confirm" required />
+            <span>I confirm that I am 18 or older, and that receiving this product is lawful at the address I have given.</span>
+          </label>
+          <label class="checkbox">
+            <input type="checkbox" name="understand_confirm" required />
+            <span>I understand that prices and warehouse stock will be reconfirmed before payment, that this form is not a charge, and that AIB Robot will not misdeclare a shipment.</span>
+          </label>
+          <button class="btn" type="submit">Submit order request</button>
+          <p class="fine">
+            A copy is stored in this browser and prepared as an email draft so we can receive it. Please also send the draft — a request that stays only on your device cannot be fulfilled.
+          </p>
+          <noscript>
+            <p>JavaScript is required to submit this request. Please enable it, or write to us with your name, email, address, and the figures you want.</p>
+          </noscript>
+        </form>
+      </div>
+    </div>
+  </div>
+</Base>
