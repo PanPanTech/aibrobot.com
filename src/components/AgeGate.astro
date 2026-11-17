@@ -1,0 +1,24 @@
+---
+import { SITE } from '../data/site';
+---
+<div id="age-gate" class="age-gate" role="dialog" aria-modal="true" aria-labelledby="age-title" aria-hidden="false">
+  <div class="age-gate-inner">
+    <div class="wordmark">AIB <span>Robot</span></div>
+    <p class="kicker">Adults only</p>
+    <h1 id="age-title">This site is for adults.</h1>
+    <p>{SITE.legalName} sells adult companion figures and one adult expression-head figure. You must be 18 years of age or older to enter. No product photography is shown until you confirm your age.</p>
+    <p class="fine">By entering you confirm that you are at least 18, and that viewing and purchasing adult companion products is lawful where you live.</p>
+    <div class="age-actions">
+      <button type="button" class="btn" id="age-enter">I am 18 or older — enter</button>
+      <button type="button" class="btn btn-ghost" id="age-leave">I am under 18 — leave</button>
+    </div>
+  </div>
+</div>
+<noscript>
+  <div class="age-gate" style="display:flex;position:relative;min-height:60vh">
+    <div class="age-gate-inner">
+      <h1>JavaScript is required</h1>
+      <p>This store asks you to confirm that you are 18 or older before showing the collection. Please enable JavaScript, then reload this page.</p>
+    </div>
+  </div>
+</noscript>

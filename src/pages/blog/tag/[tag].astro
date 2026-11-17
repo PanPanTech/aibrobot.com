@@ -1,0 +1,48 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  let posts: Awaited<ReturnType<typeof getCollection<'blog'>>> = [];
+  try { posts = await getCollection('blog'); } catch { posts = []; }
+  const tags = [...new Set(posts.flatMap((p) => p.data.tags || []))];
+  return tags.map((tag) => ({
+    params: { tag },
+    props: {
+      tag,
+      posts: posts
+        .filter((p) => (p.data.tags || []).includes(tag))
+        .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()),
+    },
+  }));
+}
+
+const { tag, posts } = Astro.props;
+function slugOf(post: (typeof posts)[number]) {
+  return post.data.slug || post.id.replace(/\.mdx?$/, '').replace(/^.*\//, '');
+}
+const label = tag.replace(/-/g, ' ');
+---
+<Base
+  title={`Journal — ${label}`}
+  description={`Essays from AIB Robot tagged “${label}.”`}
+>
+  <div class="wrap">
+    <header class="page-hero">
+      <p class="kicker">Journal · {label}</p>
+      <h1>Essays tagged “{label}”.</h1>
+      <p><a href="/blog">All essays</a></p>
+    </header>
+    <div class="blog-list" style="padding-bottom:4.5rem">
+      {posts.map((post) => (
+        <a class="blog-item" href={`/blog/${slugOf(post)}`}>
+          <div class="date">{post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' })}</div>
+          <div>
+            <h2>{post.data.title}</h2>
+            <p>{post.data.description}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</Base>

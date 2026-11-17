@@ -1,0 +1,17 @@
+---
+interface Props { title?: string; }
+const { title = 'Your request has been recorded.' } = Astro.props;
+---
+<div class="form-success" data-form-success tabindex="-1">
+  <p class="kicker">Request received locally</p>
+  <h2>{title}</h2>
+  <p>Your request ID is <strong data-request-id></strong>. A copy is stored in this browser. This site does not yet send the request to a server — please also send it to us by email using the button below, or photograph the summary, so we can actually receive it.</p>
+  <p>
+    <a class="btn" data-mailto href="mailto:">Open an email draft with this request</a>
+  </p>
+  <p class="fine">Card payment is not taken on this page. If we can fulfill the request, we will confirm inventory and the final price, then arrange payment through a high-risk processor once one is approved.</p>
+  <details style="margin-top:1.25rem">
+    <summary class="fine">Show a text summary of this request</summary>
+    <pre data-request-summary class="fine" style="white-space:pre-wrap;background:var(--paper);padding:1rem;border:1px solid var(--line);overflow:auto"></pre>
+  </details>
+</div>

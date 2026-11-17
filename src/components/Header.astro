@@ -1,0 +1,33 @@
+---
+import { SITE, NAV } from '../data/site';
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+function current(href: string) {
+  if (href === '/') return path === '/';
+  return path === href || path.startsWith(href + '/');
+}
+---
+<header class="site-header">
+  <div class="wrap-wide inner">
+    <a class="wordmark" href="/">{SITE.name.split(' ')[0]} <span>Robot</span></a>
+    <nav class="nav" aria-label="Primary">
+      {NAV.map((item) => (
+        <a href={item.href} aria-current={current(item.href) ? 'page' : undefined}>{item.label}</a>
+      ))}
+    </nav>
+    <div class="header-actions">
+      <a class="cart-link" href="/cart">
+        Inquiry bag
+        <span class="cart-count" data-cart-count data-count="0" aria-live="polite">0</span>
+      </a>
+      <button
+        type="button"
+        class="nav-toggle"
+        data-nav-toggle
+        aria-expanded="false"
+        aria-label="Open menu"
+      >
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>

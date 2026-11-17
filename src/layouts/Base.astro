@@ -1,0 +1,105 @@
+---
+import '../styles/global.css';
+import '@fontsource/cormorant-garamond/latin-400.css';
+import '@fontsource/cormorant-garamond/latin-400-italic.css';
+import '@fontsource/cormorant-garamond/latin-500.css';
+import '@fontsource/cormorant-garamond/latin-600.css';
+import '@fontsource/cormorant-garamond/latin-600-italic.css';
+import '@fontsource/source-sans-3/latin-400.css';
+import '@fontsource/source-sans-3/latin-500.css';
+import '@fontsource/source-sans-3/latin-600.css';
+
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import AgeGate from '../components/AgeGate.astro';
+import { SITE } from '../data/site';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+  noindex?: boolean;
+  requireAge?: boolean;
+  ogType?: 'website' | 'article' | 'product';
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+}
+const {
+  title,
+  description = SITE.description,
+  image = SITE.ogImage,
+  canonical,
+  noindex = false,
+  requireAge = true,
+  ogType = 'website',
+  jsonLd,
+} = Astro.props;
+
+const fullTitle = title.includes(SITE.name) ? title : `${title} — ${SITE.name}`;
+const computedCanon = new URL(Astro.url.pathname, SITE.url).toString().replace(/\/$/, '') || SITE.url;
+const canon = canonical ?? computedCanon;
+const ogImg = image.startsWith('http') ? image : new URL(image, SITE.url).toString();
+---
+<!doctype html>
+<html lang="en" data-require-age={requireAge ? 'true' : 'false'}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="rating" content="adult" />
+    <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
+    <link rel="canonical" href={canon} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/images/brand/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/images/brand/icon-192.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#F3EEE6" />
+    <meta name="author" content={SITE.legalName} />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:type" content={ogType === 'product' ? 'website' : ogType} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canon} />
+    <meta property="og:image" content={ogImg} />
+    <meta property="og:image:alt" content="AIB Robot — an adult figure in a pale jacket, beside the AIB Robot name." />
+    <meta property="og:locale" content={SITE.locale} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImg} />
+    <link rel="alternate" type="application/rss+xml" title="AIB Robot Journal" href="/rss.xml" />
+    <style is:inline>
+      .age-gate{display:none;position:fixed;inset:0;z-index:200;background:#f3eee6;align-items:center;justify-content:center}
+      html.age-open{overflow:hidden}
+      html.age-open .age-gate{display:flex}
+      html.age-verified .age-gate{display:none!important}
+    </style>
+    <script is:inline>
+      (function () {
+        try {
+          var ok = document.cookie.split(';').some(function (c) { return c.trim().indexOf('aib_age=1') === 0; });
+          if (ok) {
+            document.documentElement.classList.add('age-verified');
+          } else if (document.documentElement.getAttribute('data-require-age') !== 'false') {
+            document.documentElement.classList.add('age-open');
+          }
+        } catch (e) {}
+      })();
+    </script>
+    {jsonLd && (
+      <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    )}
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    {requireAge && <AgeGate />}
+    <Header />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+    <script is:inline src="/js/aib.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+import { PRICE_DISCLAIMER_SHORT } from '../data/site';
+---
+<Base
+  title="Inquiry bag"
+  description="Review the figures you have added to your AIB Robot inquiry bag, then send an order request. This is not a payment."
+>
+  <div class="wrap" data-cart-page>
+    <header class="page-hero">
+      <p class="kicker">Your inquiry</p>
+      <h1>Inquiry bag.</h1>
+      <p class="lead">This is a list of figures you would like us to confirm — not a charge, and not a reserved unit. When you are ready, send an order request.</p>
+    </header>
+
+    <div data-cart-empty class="cart-empty is-hidden">
+      <p>Your inquiry bag is empty.</p>
+      <p style="margin-top:1.5rem"><a class="btn" href="/shop">Browse the collection</a></p>
+    </div>
+
+    <div data-cart-filled class="is-hidden" style="padding-bottom:4.5rem">
+      <table class="cart-table">
+        <thead>
+          <tr>
+            <th>Figure</th>
+            <th>Indicated price</th>
+            <th>Qty</th>
+            <th>Line</th>
+          </tr>
+        </thead>
+        <tbody data-cart-body></tbody>
+      </table>
+      <p style="margin-top:1.5rem;font-family:var(--font-serif);font-size:1.8rem">
+        Indicated total: <span data-cart-total></span>
+      </p>
+      <p class="fine">{PRICE_DISCLAIMER_SHORT}</p>
+      <div class="cluster" style="margin-top:1.75rem">
+        <a class="btn" href="/checkout" data-checkout>Continue to order request</a>
+        <a class="btn btn-ghost" href="/shop">Keep looking</a>
+      </div>
+    </div>
+  </div>
+</Base>

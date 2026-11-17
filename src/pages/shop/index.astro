@@ -1,0 +1,53 @@
+---
+import Base from '../../layouts/Base.astro';
+import Picture from '../../components/Picture.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import FilterBar from '../../components/FilterBar.astro';
+import PriceDisclaimer from '../../components/PriceDisclaimer.astro';
+import { products, SKU_COUNT } from '../../data/products';
+
+const companions = products.filter((p) => p.collection === 'companion');
+const robots = products.filter((p) => p.collection === 'ai-robot');
+---
+<Base
+  title="Shop the collection"
+  description="Adult companion figures, 157 cm and above, plus one non-walking 164 cm F-cup AI expression head. Public prices are reconfirmed before payment. Order requests only."
+>
+  <div class="wrap-wide">
+    <header class="page-hero split" style="align-items:center;padding-bottom:2.5rem">
+      <div>
+        <p class="kicker">The collection</p>
+        <h1>Shop</h1>
+        <p class="lead">
+          {SKU_COUNT} adult figures, 157 cm and above. Silicone companions, STPE companions with a TPE build available on request, and one AI expression head that does not walk. Companion bodies are transitional products beside that longer-term category. This is a short list, not a complete industry catalogue.
+        </p>
+      </div>
+      <div>
+        <div class="frame" style="aspect-ratio:1;max-height:26rem">
+          <Picture
+            src="/images/lifestyle/yellow-denim"
+            alt="An adult figure seated, wearing a yellow top, a denim waistcoat and shorts, with a cowboy hat — collection photography, not a specific figure."
+            width={651}
+            height={875}
+            loading="eager"
+          />
+        </div>
+        <p class="photo-caption">Collection photography — clothing and finish, not a listed figure.</p>
+      </div>
+    </header>
+    <PriceDisclaimer />
+    <FilterBar />
+    <div
+      class="grid-4"
+      data-product-grid
+      data-empty="false"
+      data-empty-message="No figures match those filters. Clear the filters to see the full collection."
+    >
+      {robots.map((p) => <ProductCard product={p} />)}
+      {companions.map((p) => <ProductCard product={p} />)}
+    </div>
+    <p class="fine" style="margin:3rem 0 4rem">
+      Head, skin, eye colour and hair are chosen with your inquiry and confirmed against what is actually available. We do not carry bodies under 157 cm, cartoon or anime lines, or child-like figures.
+    </p>
+  </div>
+</Base>

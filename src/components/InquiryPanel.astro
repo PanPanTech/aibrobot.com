@@ -1,0 +1,74 @@
+---
+import type { Product } from '../data/products';
+import { formatPrice, VOICE_BOX, isWarehouseStock } from '../data/products';
+import { PRICE_DISCLAIMER_SHORT } from '../data/site';
+
+interface Props { product: Product; }
+const { product: p } = Astro.props;
+const href = p.collection === 'ai-robot' ? `/ai-robots/${p.slug}` : `/products/${p.slug}`;
+const defaultPrice = p.prices[p.defaultMaterial] ?? Object.values(p.prices)[0] ?? 0;
+---
+<form
+  data-add-inquiry
+  data-slug={p.slug}
+  data-name={p.name}
+  data-href={href}
+  data-material={p.defaultMaterial}
+  data-price={defaultPrice}
+  data-price-tpe={p.prices.TPE ?? ''}
+  data-price-stpe={p.prices.STPE ?? ''}
+  data-price-silicone={p.prices.Silicone ?? ''}
+  data-compare-tpe={p.compareAtPrices?.TPE ?? ''}
+  data-compare-stpe={p.compareAtPrices?.STPE ?? ''}
+  data-compare-silicone={p.compareAtPrices?.Silicone ?? ''}
+  data-voice-price={VOICE_BOX.price}
+  class="stack"
+>
+  {p.materials.length > 1 && (
+    <div class="option-row">
+      <p class="label">Material</p>
+      <div class="option-pills" role="group" aria-label="Material">
+        {p.materials.map((m) => (
+          <button
+            type="button"
+            data-material-pill
+            data-material={m}
+            data-price={p.prices[m] ?? ''}
+            data-compare={p.compareAtPrices?.[m] ?? ''}
+            aria-pressed={m === p.defaultMaterial ? 'true' : 'false'}
+          >
+            {m}{p.prices[m] != null ? ` · ${formatPrice(p.prices[m]!)}` : ''}
+          </button>
+        ))}
+      </div>
+      <input type="hidden" name="material" value={p.defaultMaterial} />
+      <p class="help">
+        {p.collection === 'ai-robot'
+          ? 'Material is confirmed before payment. See the notes on this page.'
+          : 'A TPE build can be requested and is priced on confirmation. The price shown is the current STPE price.'}
+      </p>
+    </div>
+  )}
+  {p.materials.length === 1 && (
+    <input type="hidden" name="material" value={p.defaultMaterial} />
+  )}
+
+  {p.voiceBoxEligible && (
+    <label class="checkbox">
+      <input type="checkbox" name="voiceBox" value="yes" />
+      <span>
+        <strong>Add the AI voice box</strong> — {formatPrice(VOICE_BOX.price)}, pending confirmation.
+        An audio add-on. It does not depend on connecting an expression head to a home Wi-Fi network.
+        <a href="/voice-box">About the voice box</a>.
+      </span>
+    </label>
+  )}
+
+  <div class="cluster" style="margin-top:0.5rem">
+    <button type="submit" class="btn">
+      {isWarehouseStock(p) ? 'Add to inquiry — request to order' : 'Add to inquiry — request availability'}
+    </button>
+    <a class="btn btn-ghost" href="/contact">Custom inquiry</a>
+  </div>
+  <p class="fine">{PRICE_DISCLAIMER_SHORT} This is not a payment. You will review the request in your inquiry bag and submit it at checkout.</p>
+</form>

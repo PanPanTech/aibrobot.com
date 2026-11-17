@@ -1,0 +1,63 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+let posts: Awaited<ReturnType<typeof getCollection<'blog'>>> = [];
+try {
+  posts = (await getCollection('blog')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+} catch {
+  posts = [];
+}
+
+function slugOf(post: (typeof posts)[number]) {
+  return post.data.slug || post.id.replace(/\.mdx?$/, '').replace(/^.*\//, '');
+}
+
+const allTags = [...new Set(posts.flatMap((p) => p.data.tags || []))].sort();
+---
+<Base
+  title="Journal"
+  description="Essays from AIB Robot on AI expression heads, companion figures, materials, care, shipping, and what to confirm before you order."
+>
+  <div class="wrap">
+    <header class="page-hero">
+      <p class="kicker">Journal</p>
+      <h1>Notes on choosing, caring, and living with a figure.</h1>
+      <p class="lead">Longer pieces, written in English, for adult buyers. They are not a substitute for the measurements on a product page.</p>
+    </header>
+
+    {allTags.length > 0 && (
+      <div class="tags" style="margin-bottom:1.5rem">
+        {allTags.map((t) => (
+          <a class="tag" href={`/blog/tag/${t}`}>{t.replace(/-/g, ' ')}</a>
+        ))}
+      </div>
+    )}
+
+    {posts.length === 0 ? (
+      <p class="lead" style="padding-bottom:4rem">
+        Essays are being prepared for this journal. The collection and the AI figure are open now. Please check back, or <a href="/contact">write to us</a> if you have a question we should answer in public.
+      </p>
+    ) : (
+      <div class="blog-list" style="padding-bottom:4.5rem">
+        {posts.map((post) => (
+          <a class="blog-item" href={`/blog/${slugOf(post)}`}>
+            <div class="date">
+              {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' })}
+              {post.data.wordCount ? <div class="fine" style="margin-top:0.4rem;letter-spacing:0">{post.data.wordCount.toLocaleString('en-US')} words</div> : null}
+            </div>
+            <div>
+              <h2>{post.data.title}</h2>
+              <p>{post.data.description}</p>
+              {post.data.tags && post.data.tags.length > 0 && (
+                <div class="tags">
+                  {post.data.tags.map((t) => <span class="tag">{t.replace(/-/g, ' ')}</span>)}
+                </div>
+              )}
+            </div>
+          </a>
+        ))}
+      </div>
+    )}
+  </div>
+</Base>

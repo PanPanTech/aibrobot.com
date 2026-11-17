@@ -1,0 +1,31 @@
+---
+interface Props {
+  src: string; // path without extension, e.g. /images/heroes/glasses
+  alt: string;
+  width?: number;
+  height?: number;
+  class?: string;
+  loading?: 'eager' | 'lazy';
+  fetchpriority?: 'high' | 'low' | 'auto';
+  sizes?: string;
+}
+const { src, alt, width, height, class: className, loading = 'lazy', fetchpriority, sizes } = Astro.props;
+const webp = src.endsWith('.webp') || src.endsWith('.jpg') || src.endsWith('.png')
+  ? src.replace(/\.(jpg|png)$/, '.webp')
+  : src + '.webp';
+const jpg = src.endsWith('.jpg') || src.endsWith('.png') || src.endsWith('.webp')
+  ? src.replace(/\.webp$/, '.jpg')
+  : src + '.jpg';
+---
+<picture class={className}>
+  <source srcset={webp} type="image/webp" sizes={sizes} />
+  <img
+    src={jpg}
+    alt={alt}
+    width={width}
+    height={height}
+    loading={loading}
+    fetchpriority={fetchpriority}
+    decoding={loading === 'eager' ? 'sync' : 'async'}
+  />
+</picture>

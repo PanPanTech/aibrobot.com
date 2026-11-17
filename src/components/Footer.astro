@@ -1,0 +1,39 @@
+---
+import { SITE, FOOTER, PRICE_DISCLAIMER_SHORT } from '../data/site';
+---
+<footer class="site-footer">
+  <div class="wrap-wide">
+    <div class="footer-grid">
+      <div>
+        <p class="footer-brand">{SITE.name}</p>
+        <p class="fine">{SITE.legalName}. {SITE.tagline}</p>
+        <p class="fine" style="margin-top:1rem">
+          The expression-head figure for sale today does not walk. Adult companion figures in this catalog are transitional products. Adults 18 and older. English-language store.
+        </p>
+        <p class="fine" style="margin-top:1rem">{PRICE_DISCLAIMER_SHORT}</p>
+      </div>
+      <div class="footer-col">
+        <h3>Collection</h3>
+        <ul>
+          {FOOTER.collections.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Guide</h3>
+        <ul>
+          {FOOTER.guide.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Legal</h3>
+        <ul>
+          {FOOTER.legal.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <p>© {new Date().getFullYear()} {SITE.legalName}. Adults 18+ only. English-language store.</p>
+      <p>Public prices as of 15 November 2026, and warehouse lists from November 2026, reconfirmed before payment. aibrobot.com</p>
+    </div>
+  </div>
+</footer>

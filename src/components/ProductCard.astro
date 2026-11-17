@@ -1,0 +1,58 @@
+---
+import type { Product } from '../data/products';
+import { formatPrice, startingPrice, heightBand, availabilityLabel, compareAtPrice, isWarehouseStock, lineLabel } from '../data/products';
+import Picture from './Picture.astro';
+
+interface Props { product: Product; }
+const { product: p } = Astro.props;
+const href = p.collection === 'ai-robot' ? `/ai-robots/${p.slug}` : `/products/${p.slug}`;
+const price = startingPrice(p);
+const compare = compareAtPrice(p);
+const multi = Object.keys(p.prices).length > 1;
+const materials = p.materials.join(',');
+const hero = p.images[0];
+---
+<article
+  data-product={p.slug}
+  data-line={p.line}
+  data-materials={materials}
+  data-height={p.heightCm}
+  data-height-band={heightBand(p.heightCm)}
+  data-availability={p.availability}
+>
+  <a class="product-card" href={href}>
+    {hero && (
+      <div class="product-card-media">
+        <Picture
+          src={hero.src}
+          alt={hero.alt}
+          width={hero.width}
+          height={hero.height}
+          loading="lazy"
+        />
+      </div>
+    )}
+    <div class="brand-line">{lineLabel(p.line)}</div>
+    <h3>{p.shortName}</h3>
+    <p class="meta">
+      {p.heightCm} cm{p.cup ? ` · ${p.cup}-cup` : ''} · {p.materials.join(' / ')}
+      {p.weightKg ? ` · ${p.weightKg} kg` : ''}
+    </p>
+    <div class="cluster" style="margin-top:0.85rem">
+      {isWarehouseStock(p) && (
+        <span class="badge badge-ok">{availabilityLabel(p)}</span>
+      )}
+      {p.availability === 'available-to-order' && (
+        <span class="badge badge-warn">Available to order</span>
+      )}
+      {p.collection === 'ai-robot' && <span class="badge badge-ai">Does not walk</span>}
+    </div>
+    <div class="price-row">
+      <span class="price">
+        {compare != null && <s class="compare-at">{formatPrice(compare)}</s>}
+        {multi ? `From ${formatPrice(price)}` : formatPrice(price)}
+      </span>
+      <span class="fine">{availabilityLabel(p)}</span>
+    </div>
+  </a>
+</article>

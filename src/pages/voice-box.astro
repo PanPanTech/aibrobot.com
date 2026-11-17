@@ -1,0 +1,54 @@
+---
+import Base from '../layouts/Base.astro';
+import { formatPrice, VOICE_BOX, products } from '../data/products';
+import PriceDisclaimer from '../components/PriceDisclaimer.astro';
+
+const eligible = products.filter((p) => p.voiceBoxEligible).length;
+---
+<Base
+  title="AI voice box"
+  description="An optional AI voice box offered at $100, pending confirmation. It is an audio add-on, not the facial-expression head, and it does not depend on home Wi-Fi."
+>
+  <div class="wrap">
+    <header class="page-hero">
+      <p class="kicker">Optional add-on</p>
+      <h1>The AI voice box — not the expression head.</h1>
+      <p class="lead">{VOICE_BOX.summary}</p>
+    </header>
+
+    <div class="split top">
+      <div class="prose">
+        <p>
+          The AI voice box is an optional audio add-on offered at {formatPrice(VOICE_BOX.price)}, pending confirmation at the time of your order. We have not added a markup of our own to that figure, and we will reconfirm it before payment.
+        </p>
+        <p>
+          This is not the facial-expression head. That head is a separate product, with a display and a network-connected conversation feature, and we do not promise that it works on US or EU home Wi-Fi. The voice box is an audio add-on. It does not depend on connecting that head to a home network, and it does not make a figure walk.
+        </p>
+        <p>
+          The 4 October 2025 options sheet for the silicone companions also lists a simpler “Sound” option at +$30 USD. That is a different line. If you want audio on a silicone companion, tell us which you mean — the $30 sound option on that sheet, or this $100 AI voice box — and we will confirm what is actually available.
+        </p>
+        <h2>How to add it</h2>
+        <p>
+          On any of the {eligible} product pages in this collection you can tick the voice-box option when you add a figure to your inquiry bag. You can also mention it in a <a href="/contact">contact</a> or <a href="/checkout">order request</a>. We will confirm the current price and whether it can be fitted to the body and head you want, before payment.
+        </p>
+        <h2>What we will not claim</h2>
+        <p>
+          We will not describe a library of voices, a battery life, or a set of phrases that we have not documented for this specific box. If a current specification is available when we confirm your order, we will pass it on. Until then, treat this page as a clearly priced option with a clearly stated limit.
+        </p>
+      </div>
+      <div>
+        <div class="pdp-visual" style="position:static;min-height:18rem">
+          <p class="spec-ghost">Add-on</p>
+          <div class="pdp-monogram" style="font-size:4.5rem">{formatPrice(VOICE_BOX.price)}</div>
+          <p class="sub">Pending confirmation. The figure shown is the price we are offering, not a markup we invented.</p>
+        </div>
+        <div style="margin-top:1.25rem"><PriceDisclaimer short /></div>
+        <div class="cluster" style="margin-top:1.5rem">
+          <a class="btn" href="/shop">Choose a figure</a>
+          <a class="btn btn-ghost" href="/ai-robots">About the AI robot</a>
+        </div>
+      </div>
+    </div>
+    <div style="height:4rem"></div>
+  </div>
+</Base>

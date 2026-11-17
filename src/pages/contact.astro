@@ -1,0 +1,77 @@
+---
+import Base from '../layouts/Base.astro';
+import FormSuccess from '../components/FormSuccess.astro';
+---
+<Base
+  title="Contact"
+  description="Contact AIB Robot about a figure, an option, a wholesale question, or an order request. Correspondence is through this form."
+>
+  <div class="wrap">
+    <header class="page-hero">
+      <p class="kicker">Contact</p>
+      <h1>Write to us.</h1>
+      <p class="lead">There is no published street address and no invented telephone number on this site. Use this form — or the <a href="/checkout">order-request</a> flow if you already have figures in your inquiry bag.</p>
+    </header>
+    <div class="split top" style="margin-bottom:4.5rem">
+      <div class="prose">
+        <p>
+          Tell us which figure or option you are asking about, the country the package would go to, and anything we should confirm before we reply — a head, a material, a voice box, or a warehouse unit. If your question is about a request you have already submitted, include the request ID.
+        </p>
+        <p>
+          For trade purchases, use the <a href="/wholesale">wholesale form</a>. For damage after delivery, use this form and attach nothing yet — we will ask for photographs in the reply. Please do not send payment-card numbers.
+        </p>
+      </div>
+      <div>
+        <FormSuccess title="Your message has been recorded." />
+        <form data-aib-form="contact" data-subject="AIB Robot — contact" novalidate>
+          <p class="form-error" data-form-error role="alert"></p>
+          <div class="form-row">
+            <div class="field">
+              <label for="c-name">Your name</label>
+              <input id="c-name" name="name" type="text" required autocomplete="name" />
+            </div>
+            <div class="field">
+              <label for="c-email">Email</label>
+              <input id="c-email" name="email" type="email" required autocomplete="email" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="c-country">Country</label>
+              <input id="c-country" name="country" type="text" autocomplete="country-name" />
+            </div>
+            <div class="field">
+              <label for="c-topic">Topic</label>
+              <select id="c-topic" name="topic">
+                <option value="product">A figure or option</option>
+                <option value="order">An existing request</option>
+                <option value="warehouse">US warehouse availability</option>
+                <option value="warehouse-eu">EU warehouse availability</option>
+                <option value="ai">AI robot or voice box</option>
+                <option value="damage">Damage or defect</option>
+                <option value="other">Something else</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="c-message">Message</label>
+            <textarea id="c-message" name="message" required></textarea>
+          </div>
+          <div class="field sr-only" aria-hidden="true">
+            <label for="c-website">Leave blank</label>
+            <input id="c-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+          <label class="checkbox">
+            <input type="checkbox" name="age_confirm" required />
+            <span>I confirm that I am 18 or older.</span>
+          </label>
+          <button class="btn" type="submit">Send message</button>
+          <p class="fine">This form is stored in your browser and prepared as an email draft so we can receive it.</p>
+          <noscript>
+            <p>JavaScript is required to record this message. Please enable it.</p>
+          </noscript>
+        </form>
+      </div>
+    </div>
+  </div>
+</Base>

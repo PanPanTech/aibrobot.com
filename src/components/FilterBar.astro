@@ -1,0 +1,51 @@
+---
+import { HEIGHT_BANDS } from '../data/products';
+interface Props {
+  heading?: string;
+  showStock?: boolean;
+}
+const { showStock = true } = Astro.props;
+---
+<form class="filter-bar" data-filter-bar role="search" aria-label="Filter the collection" onsubmit="return false">
+  <div class="filter-group">
+    <label for="filter-line">Line</label>
+    <select id="filter-line" name="line">
+      <option value="">All lines</option>
+      <option value="ai">AI expression head</option>
+      <option value="silicone">Silicone companions</option>
+      <option value="stpe">STPE companions</option>
+    </select>
+  </div>
+  <div class="filter-group">
+    <label for="filter-material">Material</label>
+    <select id="filter-material" name="material">
+      <option value="">All materials</option>
+      <option value="TPE">TPE</option>
+      <option value="STPE">STPE</option>
+      <option value="Silicone">Silicone</option>
+    </select>
+  </div>
+  <div class="filter-group">
+    <label for="filter-height">Height</label>
+    <select id="filter-height" name="height">
+      <option value="">All heights (157 cm+)</option>
+      {HEIGHT_BANDS.map((b) => <option value={b.id}>{b.label}</option>)}
+    </select>
+  </div>
+  {showStock && (
+    <div class="filter-group">
+      <label for="filter-stock">Availability</label>
+      <select id="filter-stock" name="stock">
+        <option value="">All</option>
+        <option value="us">US warehouse</option>
+        <option value="eu">EU warehouse</option>
+        <option value="order">Available to order</option>
+      </select>
+    </div>
+  )}
+  <div class="filter-group">
+    <label class="sr-only" for="filter-reset">Reset</label>
+    <button class="btn btn-ghost btn-sm" id="filter-reset" data-filter-reset type="button">Clear filters</button>
+  </div>
+  <p class="filter-count" data-filter-count></p>
+</form>

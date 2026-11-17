@@ -1,0 +1,44 @@
+---
+import Base from '../layouts/Base.astro';
+import ProductCard from '../components/ProductCard.astro';
+import FilterBar from '../components/FilterBar.astro';
+import PriceDisclaimer from '../components/PriceDisclaimer.astro';
+import { usWarehouseProducts } from '../data/products';
+
+const items = usWarehouseProducts();
+---
+<Base
+  title="US warehouse list"
+  description="Companion figures on the current US-warehouse inventory lists we received in November 2026. Availability is reconfirmed before payment."
+>
+  <div class="wrap-wide">
+    <header class="page-hero">
+      <p class="kicker">United States warehouse</p>
+      <h1>On the current US list.</h1>
+      <p class="lead">
+        {items.length} figures in this collection appear on the current US-warehouse inventory lists we received in November 2026. We treat those lists as a starting point, not as a live inventory count, and we reconfirm availability — including the head, skin, and material actually available — before you pay.
+      </p>
+    </header>
+    <div class="prose" style="margin-bottom:2rem">
+      <p>
+        We do not publish a delivery-day range. When a unit is still in the US warehouse, shipping is usually faster than a factory order from China — how much faster is something we will tell you for the specific unit, once we know.
+      </p>
+      <p>
+        Some bodies also appear on the <a href="/in-stock-eu">EU warehouse list</a>. The AI bionic robot #1068 is available to order and is not marked in stock here; it is listed in the <a href="/ai-robots">AI collection</a>.
+      </p>
+    </div>
+    <PriceDisclaimer />
+    <FilterBar showStock={false} />
+    <div
+      class="grid-4"
+      data-product-grid
+      data-empty="false"
+      data-empty-message="No figures match those filters."
+    >
+      {items.map((p) => <ProductCard product={p} />)}
+    </div>
+    <p class="fine" style="margin:3rem 0 4rem">
+      Source: the US warehouse lists we received in November 2026. We do not publish unit counts. The expression-head figure is not marked in stock on this page.
+    </p>
+  </div>
+</Base>
