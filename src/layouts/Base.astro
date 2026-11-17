@@ -45,6 +45,13 @@ const ogImg = image.startsWith('http') ? image : new URL(image, SITE.url).toStri
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-DJ4Q4NBE1K"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-DJ4Q4NBE1K');
+    </script>
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <meta name="rating" content="adult" />
