@@ -4,7 +4,7 @@ export const SITE = {
   tagline: 'AI bionic and companion robots, described as they are today.',
   description:
     'AIB Robot is a category site for AI bionic and companion robots. The figure for sale today with an expression head is a non-walking head on a 164 cm body. Adult companion figures in the catalog are transitional products. English language. Adults 18+.',
-  url: 'https://aibrobot.com',
+  url: 'https://www.aibrobot.com',
   lang: 'en',
   locale: 'en_US',
   ogImage: '/images/brand/og.jpg',

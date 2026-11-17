@@ -2,7 +2,7 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://aibrobot.com',
+  site: 'https://www.aibrobot.com',
   output: 'static',
   compressHTML: true,
   trailingSlash: 'never',
