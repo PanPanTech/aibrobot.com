@@ -31,11 +31,12 @@ const label = tag.replace(/-/g, ' ');
     <header class="page-hero">
       <p class="kicker">Journal · {label}</p>
       <h1>Essays tagged “{label}”.</h1>
-      <p><a href="/blog">All essays</a></p>
+      <p><a href="/blog/">All essays</a></p>
     </header>
     <div class="blog-list" style="padding-bottom:4.5rem">
       {posts.map((post) => (
-        <a class="blog-item" href={`/blog/${slugOf(post)}`}>
+        <a class:list={['blog-item', { 'blog-item--illustrated': !!post.data.hero }]} href={`/blog/${slugOf(post)}/`}>
+          {post.data.hero && <img class="blog-thumbnail" src={post.data.hero.src} alt={post.data.hero.alt} loading="lazy" decoding="async" />}
           <div class="date">{post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' })}</div>
           <div>
             <h2>{post.data.title}</h2>

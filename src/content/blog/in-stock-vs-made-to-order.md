@@ -1,26 +1,99 @@
 ---
 title: "Warehouse List or Made to Order"
 slug: "in-stock-vs-made-to-order"
-description: "What a November 2026 warehouse list means, why we reconfirm before payment, and why the expression head is not in stock just because a similar body is."
+description: "Choose between a listed warehouse body and an available-to-order configuration by comparing appearance, timing, freight and the confirmations each path needs."
 date: "2026-11-01"
+updatedDate: "2026-11-17"
 tags: ["shipping", "buying"]
-wordCount: 513
+wordCount: 1457
+hero:
+  src: "/images/lifestyle/yellow-denim.webp"
+  alt: "Collection image of an adult companion figure in a yellow top and denim clothing, seated indoors."
+  caption: "Collection photography illustrates styling. It does not identify a currently available warehouse unit."
+faq:
+  - question: "What does US or EU warehouse mean on AIB Robot?"
+    answer: "The body appeared on a warehouse list received in November 2026. The actual unit, head, skin and material are reconfirmed before payment. The label provides no live quantity or established delivery-day range."
+  - question: "Is a warehouse figure always faster than an available-to-order figure?"
+    answer: "A confirmed existing unit can usually be dispatched sooner than a figure that still needs to be made. Actual preparation, dispatch and transit timing still depend on the unit and destination and are confirmed for the order."
+  - question: "Can I change the head on a warehouse unit?"
+    answer: "Ask about the specific unit and the requested head. A warehouse listing does not establish that every head or finish can be substituted. Any accepted change, its availability, cost and effect on timing need written confirmation."
+  - question: "Is the expression-head figure on the warehouse lists?"
+    answer: "The 164 cm F-cup figure with expression head #1068 is available to order. It does not appear on the November 2026 US or EU lists. The similarly sized STPE companion on warehouse lists has its own product configuration."
+  - question: "Does the inquiry bag hold a warehouse figure for me?"
+    answer: "Adding a figure to the inquiry bag creates a request and does not reserve a unit. Ask for current availability, exact configuration and final pricing before accepting an order in writing."
 ---
 
-“In stock” is the most abused phrase in this category. On this site we use a duller one. A figure is on a warehouse list, or it is available to order. The list we are using was received in November 2026. There is a US list and a smaller EU list, and one body is on both. We do not publish how many units those lists represent. A list is a starting point. It is not a live count, and it is not a delivery date.
+Choose a warehouse-listed companion when you are willing to consider an existing unit's actual head, material and finish. Choose an available-to-order figure when the requested configuration needs its own current confirmation. Both paths require written confirmation of availability, price and shipping before payment.
 
-## What we do before you pay
+AIB Robot uses US and EU warehouse lists received in November 2026. They identify bodies to ask about, without supplying a live unit count or a delivery-day guarantee. This guide helps you choose a purchase path. The companion article on [warehouse reconfirmation](/blog/why-warehouse-lists-need-a-reconfirm) explains how a dated stock record becomes a current answer for a particular order.
 
-If you request a body from the US or EU page, we ask whether a unit is still there and which head, skin, and material are actually on it. Heads in photographs are example pairings. A note that a head was often seen with a body is not a promise that today’s unit wears it. If the unit is gone, we say so. We do not take payment for a shelf that has already been emptied.
+## Compare the decisions each path involves
 
-If the figure is available to order, it was not on those lists. Lead time, configuration, and freight are confirmed in writing before payment. We do not publish a number of days copied from a general production estimate. Your configuration may not match the estimate, and we would rather wait for a current answer than decorate the page with someone else’s average.
+Start with what matters most to you. An existing configuration may suit a buyer who has flexibility about the photographed head. Another buyer may need a particular combination of material, head and finish and be willing to wait for a confirmed lead time.
 
-## The expression head is its own case
+| Decision | Warehouse-listed body | Available-to-order figure |
+| --- | --- | --- |
+| Starting evidence | Body appears on a November 2026 regional list | Product is outside those warehouse lists |
+| Configuration | Confirm the unit's actual head, skin, material and finish | Confirm the requested combination and current availability |
+| Timing | Ask about unit preparation, dispatch and destination transit | Establish the current lead time before planning transit |
+| Options | Ask what can be supplied with that existing unit | Request options and have compatibility confirmed |
+| Freight | Quote for the actual warehouse, destination and packed unit | Quote for the actual origin, destination and packed unit |
+| Order status | Inquiry creates no hold | Inquiry creates no accepted production order |
 
-The 164 cm F-cup expression head is available to order. It is not on the warehouse lists. A 164 cm F-cup companion body that does appear on both the US and EU lists is a different product, at the STPE price of $2,199 rather than $3,099, and it does not include the expression head. We will not mark the robot in stock because the companion body exists. If you want the moving face, order that page. If you want the companion, order the other one. Mixing them up is the easiest mistake on the site, which is why both pages say they are not each other.
+Neither path automatically resolves the body weight, the included accessories or an audio option. Keep those questions in the same request so that the final answer concerns the complete figure you intend to receive.
 
-## Why the difference matters
+## Use the regional pages to narrow the search
 
-A warehouse unit can be faster, and it is also more fixed. You are closer to buying the figure that is already made, including its head and its small variations from the 2025 chart. A made-to-order figure is where options belong: a skin tone from the silicone sheet, implanted hair, a voice box, a TPE build instead of the listed STPE. Those options are requests until they are confirmed, and they take the time they take. Neither path includes a card charge on this website. Both end in a written confirmation or they do not proceed.
+The [US warehouse page](/in-stock-us) and [EU warehouse page](/in-stock-eu) filter the collection by the lists received. A smaller selection appears on the EU list, and some body availability overlaps between regions. That overlap does not establish that the same head and finish are available in both places.
 
-Choose the warehouse list when you want a body we can ask about today and you can accept the head that is actually there. Choose made to order when the configuration matters more than the calendar, and you can wait for a date that is about your order. Choose neither if you need a walking robot. That is not a lead-time problem. It is a different machine.
+If a body appears in both regions, give your receiving country and ask which actual unit can be supplied. Confirm its configuration before choosing between origins. A preferred region can help narrow the inquiry while freight and the actual delivery arrangement remain open.
+
+A body outside the regional pages may still appear in the full [shop](/shop) as available to order. That wording leaves room for a configuration and lead-time discussion. It establishes no completion date or confirmed production slot by itself.
+
+## Consider how much flexibility you have
+
+Write down the features you can accept changing and the ones that decide the purchase. You might be flexible about a wig color but require the named body material and a manageable weight. Another buyer might prioritize a particular head and be comfortable choosing a later production arrangement.
+
+For an existing unit, ask what is already fitted. Then state any requested change and wait for confirmation. A photograph with an example head cannot establish that today's warehouse unit carries the same head or that a replacement is immediately available.
+
+For an available-to-order request, identify each option precisely. Head, skin tone, eye color, hair and electronic additions need a current answer. The October 2025 silicone options sheet is a reference for questions. Its presence does not guarantee that every option remains available on every configuration.
+
+## Keep the expression-head order distinct
+
+The 164 cm F-cup expression-head figure with head #1068 is available to order. It is listed at $3,099 as of 15 November 2026 and does not appear on the warehouse lists used by this site.
+
+A 164 cm F-cup STPE companion appears on the US and EU lists at the companion price of $2,199 as of the same date. That body listing does not include the separately configured expression head. If the moving face is the reason for your inquiry, begin from the [expression-head product page](/ai-robots/wm-164-f-1068).
+
+The expression-head order also needs confirmation of material and current connectivity guidance. The body is manually posed and cannot walk. A different supply path cannot change those product limits. Read the [AI category guide](/blog/ai-bionic-and-expression-robots) before deciding that waiting for an expression head matches your intended use.
+
+## Ask about three different parts of timing
+
+Separate the time needed to prepare the unit from the dispatch date and the carrier's transit estimate. They answer different questions. A production estimate concerns preparation, while transit begins after a carrier receives the shipment.
+
+For a warehouse request, ask whether the current configuration needs any work before dispatch. An accepted option or head change may affect that answer. For an available-to-order request, ask for the current lead time for the complete configuration and what remains to be confirmed afterward.
+
+If you have a deadline, give a calendar date and destination at the start. Ask what can be established for that order. AIB Robot publishes no universal delivery-day range, so the answer must come from the actual arrangement. Keep estimates and confirmed dates clearly identified in your notes.
+
+## Compare complete delivered arrangements
+
+A public figure price excludes a freight quotation. The shipping cost is confirmed after the origin, destination and actual unit weight are known. Do not compare two regional options using the figure price alone.
+
+Ask about packed dimensions and packed weight if they affect cost or access. Carrier pricing may account for package size as well as actual weight. FedEx explains dimensional weight as a chargeable measure related to the space a package occupies. The eventual carrier and rate still depend on the order. [FedEx dimensional-weight guidance](https://www.fedex.com/en-us/shipping/packaging/what-is-dimensional-weight.html)
+
+Duties, taxes and clearance formalities, where applicable, follow the agreement described in the [shipping policy](/shipping). Plain outer packaging is requested and its method confirmed with the order. Customs information must remain accurate. Settle the destination arrangement before accepting either supply path.
+
+## Work through a practical example
+
+Suppose you like the 175 cm silicone companion and prefer a US-listed unit. Your first request should ask whether a unit remains available, which head and finish are fitted, and the current price and freight for your destination. The public $1,950 figure is suggested retail from 4 October 2025 and requires reconfirmation.
+
+If the available head suits you, the next questions concern unit condition, weight, included items and the current dispatch arrangement. If you want a different head or an audio module, ask whether those can be supplied with that unit and how the change affects the quotation.
+
+If the available configuration does not fit your requirements, ask about an available-to-order arrangement for the desired combination. Compare the new lead time and cost as a fresh offer. The earlier warehouse answer cannot establish the later configuration's availability.
+
+## Make the decision from the written answer
+
+Before accepting, check that the response names the body, material, head, finish, accepted options, origin and final cost. Ask for the current timing that applies to that configuration. Save any relevant photograph with the reply if it identifies the offered unit.
+
+AIB Robot's inquiry bag records preferences without reserving stock or charging a card. The [terms](/terms) explain written acceptance. If an existing unit becomes unavailable during the inquiry, review any proposed alternative before the order proceeds.
+
+Choose the path that fits the configuration you want and the timing you can realistically accept. A useful warehouse answer describes an existing unit you would be comfortable receiving. A useful available-to-order answer describes a configuration and current lead time specific enough to plan around.

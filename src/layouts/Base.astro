@@ -18,6 +18,7 @@ interface Props {
   title: string;
   description?: string;
   image?: string;
+  imageAlt?: string;
   canonical?: string;
   noindex?: boolean;
   requireAge?: boolean;
@@ -28,6 +29,7 @@ const {
   title,
   description = SITE.description,
   image = SITE.ogImage,
+  imageAlt = 'AIB Robot — an adult figure in a pale jacket, beside the AIB Robot name.',
   canonical,
   noindex = false,
   requireAge = true,
@@ -36,7 +38,9 @@ const {
 } = Astro.props;
 
 const fullTitle = title.includes(SITE.name) ? title : `${title} — ${SITE.name}`;
-const computedCanon = new URL(Astro.url.pathname, SITE.url).toString().replace(/\/$/, '') || SITE.url;
+const pathname = Astro.url.pathname.replace(/\/$/, '');
+const canonicalPath = pathname === '/blog' || pathname.startsWith('/blog/') ? `${pathname}/` : pathname;
+const computedCanon = canonicalPath ? new URL(canonicalPath, SITE.url).toString() : SITE.url;
 const canon = canonical ?? computedCanon;
 const ogImg = image.startsWith('http') ? image : new URL(image, SITE.url).toString();
 ---
@@ -62,12 +66,13 @@ const ogImg = image.startsWith('http') ? image : new URL(image, SITE.url).toStri
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canon} />
     <meta property="og:image" content={ogImg} />
-    <meta property="og:image:alt" content="AIB Robot — an adult figure in a pale jacket, beside the AIB Robot name." />
+    <meta property="og:image:alt" content={imageAlt} />
     <meta property="og:locale" content={SITE.locale} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImg} />
+    <meta name="twitter:image:alt" content={imageAlt} />
     <link rel="alternate" type="application/rss+xml" title="AIB Robot Journal" href="/rss.xml" />
     <style is:inline>
       .age-gate{display:none;position:fixed;inset:0;z-index:200;background:#f3eee6;align-items:center;justify-content:center}

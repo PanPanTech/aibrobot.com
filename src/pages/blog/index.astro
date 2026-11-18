@@ -16,20 +16,20 @@ function slugOf(post: (typeof posts)[number]) {
 const allTags = [...new Set(posts.flatMap((p) => p.data.tags || []))].sort();
 ---
 <Base
-  title="Journal"
-  description="Essays from AIB Robot on AI expression heads, companion figures, materials, care, shipping, and what to confirm before you order."
+    title="AI Companion Robot Guides, Prices & Care"
+    description="Practical guides to AI companion robots, expression heads, voice boxes, prices, materials, care and shipping, with buyer checklists and dated sources."
 >
   <div class="wrap">
     <header class="page-hero">
       <p class="kicker">Journal</p>
-      <h1>Notes on choosing, caring, and living with a figure.</h1>
-      <p class="lead">Longer pieces, written in English, for adult buyers. They are not a substitute for the measurements on a product page.</p>
+      <h1>AI companion robot guides.</h1>
+      <p class="lead">Compare configurations, plan a budget, understand connectivity, and care for an adult companion figure. Start with the guide that answers your next buying question.</p>
     </header>
 
     {allTags.length > 0 && (
       <div class="tags" style="margin-bottom:1.5rem">
         {allTags.map((t) => (
-          <a class="tag" href={`/blog/tag/${t}`}>{t.replace(/-/g, ' ')}</a>
+          <a class="tag" href={`/blog/tag/${t}/`}>{t.replace(/-/g, ' ')}</a>
         ))}
       </div>
     )}
@@ -41,10 +41,12 @@ const allTags = [...new Set(posts.flatMap((p) => p.data.tags || []))].sort();
     ) : (
       <div class="blog-list" style="padding-bottom:4.5rem">
         {posts.map((post) => (
-          <a class="blog-item" href={`/blog/${slugOf(post)}`}>
+          <a class:list={['blog-item', { 'blog-item--illustrated': !!post.data.hero }]} href={`/blog/${slugOf(post)}/`}>
+            {post.data.hero && <img class="blog-thumbnail" src={post.data.hero.src} alt={post.data.hero.alt} loading="lazy" decoding="async" />}
             <div class="date">
               {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' })}
               {post.data.wordCount ? <div class="fine" style="margin-top:0.4rem;letter-spacing:0">{post.data.wordCount.toLocaleString('en-US')} words</div> : null}
+              {post.data.updatedDate && <div class="fine" style="margin-top:0.4rem;letter-spacing:0">Updated {post.data.updatedDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' })}</div>}
             </div>
             <div>
               <h2>{post.data.title}</h2>
